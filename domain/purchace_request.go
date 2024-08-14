@@ -1,13 +1,23 @@
 package domain
 
-import (
-	"github.com/AldiOktavianto/go-domain/module/proc/client"
-)
+type PurchaseRequestGetResponse struct {
+	Status string `json:"status"`
+}
+
+type PurchaseRequestPostRequest struct {
+	Name string `json:"name"`
+}
+
+type PurchaseRequestPostResponse struct {
+	Message string `json:"message"`
+}
 
 type PurchaseRequestUseCase interface {
-	PurchaseRequestGet() (*client.GetPrResponse, error)
+	PurchaseRequestGet() (*PurchaseRequestGetResponse, error)
+	PurchaseRequestPost(PurchaseRequestPostRequest) (*PurchaseRequestPostResponse, error)
 }
 
 type PurchaseRequestRepository interface {
-	PurchaseRequestGet() (*client.GetPrResponse, error)
+	PurchaseRequestGet() (*PurchaseRequestGetResponse, error)
+	PurchaseRequestPost(PurchaseRequestPostRequest) (*PurchaseRequestPostResponse, error)
 }

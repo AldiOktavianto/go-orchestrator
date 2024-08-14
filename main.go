@@ -1,7 +1,6 @@
 package main
 
 import (
-	"log"
 	"time"
 
 	"github.com/AldiOktavianto/go-domain/module/proc/client"
@@ -28,8 +27,7 @@ func main() {
 	}))
 
 	procClient := client.NewProcClient(client.ProcClientParams{URL: "http://localhost:9090"})
-
-	log.Println(procClient.PrClient)
+	// procClient := client.NewProcClient(client.ProcClientParams{URL: "http://go-domain-svc.go-http.svc.cluster.local"})
 
 	// Respositories
 	purchaseRequestRepository := _purchaseRequestRepository.NewPurchaseRequestRepository(procClient.PrClient)

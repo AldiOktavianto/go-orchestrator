@@ -3,8 +3,6 @@ package usecase
 import (
 	"prisca-orchestrator/domain"
 	"time"
-
-	"github.com/AldiOktavianto/go-domain/module/proc/client"
 )
 
 type PurchaseRequestUseCase struct {
@@ -19,6 +17,10 @@ func NewPurchaseRequestUseCase(r domain.PurchaseRequestRepository, timeout time.
 	}
 }
 
-func (pu *PurchaseRequestUseCase) PurchaseRequestGet() (*client.GetPrResponse, error) {
+func (pu *PurchaseRequestUseCase) PurchaseRequestGet() (*domain.PurchaseRequestGetResponse, error) {
 	return pu.purchaseRequestRepo.PurchaseRequestGet()
+}
+
+func (pu *PurchaseRequestUseCase) PurchaseRequestPost(req domain.PurchaseRequestPostRequest) (*domain.PurchaseRequestPostResponse, error) {
+	return pu.purchaseRequestRepo.PurchaseRequestPost(req)
 }

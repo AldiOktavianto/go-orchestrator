@@ -16,12 +16,34 @@ func NewPurchaseRequestRepository(prClient client.PrClient) domain.PurchaseReque
 	}
 }
 
-func (pr *PurchaseRequestRepository) PurchaseRequestGet() (*client.GetPrResponse, error) {
+func (pr *PurchaseRequestRepository) PurchaseRequestGet() (*domain.PurchaseRequestGetResponse, error) {
 	resp, err := pr.prClient.GetPr()
 
 	if err != nil {
 		return nil, err
 	}
 
-	return resp, nil
+	result := &domain.PurchaseRequestGetResponse{
+		Status: resp.Status,
+	}
+
+	return result, nil
+}
+
+func (pr *PurchaseRequestRepository) PurchaseRequestPost(req domain.PurchaseRequestPostRequest) (*domain.PurchaseRequestPostResponse, error) {
+	newPr := client.PostPrRequest{
+		Name: req.Name,
+	}
+
+	respPost, err := pr.prClient.PostPr(newPr)
+
+	if err != nil {
+		return nil, err
+	}
+
+	result := &domain.PurchaseRequestPostResponse{
+		Message: respPost.Message,
+	}
+
+	return result, nil
 }
